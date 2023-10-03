@@ -1,4 +1,5 @@
 import { palavroes } from "./modules/db_palavroes.js";
+import { palavras } from "./modules/db_palavras.js";
 
 const messageContent = document.getElementById("message-content");
 const messages = document.getElementById("messages");
@@ -31,8 +32,8 @@ function messageVerification() {
   palavroes.forEach((element) => {
     messageArr.forEach((value, index) => {
       let strValue = value.split("");
-      let isNumber = false;
       let exist = false;
+      let notBadWord = false;
 
       strValue.forEach((char) => {
         regex.forEach((charInRegex) => {
@@ -47,6 +48,9 @@ function messageVerification() {
       if (!value.includes(element)) return;
 
       strValue.filter((val) => (val == "-" ? (exist = true) : false));
+      palavras.filter((val) => (val == value ? (notBadWord = true) : false));
+
+      if (notBadWord) return;
       if (exist) return;
 
       strTransform(value, index);
