@@ -32,11 +32,14 @@ body {
 
 #message-content {
   outline: none;
-  text-align: center;
+  padding: 10px 30px;
 
-  padding: 10px;
   border: none;
-  border-radius: 5px;
+  border-radius: 25px;
+
+  background-color: #252525;
+  color: #eee;
+  font-weight: 700;
 }
 
 #button-submit {
