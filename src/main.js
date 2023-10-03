@@ -1,10 +1,13 @@
 import { palavroes } from "./modules/db_palavroes.js";
 import { palavras } from "./modules/db_palavras.js";
+import { typesEmails } from "./modules/db_emails.js";
 
 const messageContent = document.getElementById("message-content");
 const messages = document.getElementById("messages");
 const getUserMessage = document.getElementById("button-submit");
 let finalMessage = "";
+
+const regex = ["@", "#", "$", "&", "%", "*", "0", "1", "3", "4"];
 
 function messageVerification() {
   let initialMessage = messageContent.value || "Nenhuma mensagem digitada";
@@ -15,7 +18,6 @@ function messageVerification() {
 
   messageContent.value = "";
 
-  const regex = ["@", "#", "$", "&", "%", "*", "0", "1", "3", "4"];
   const messageArr = messageForVerification.split(" ");
 
   function strTransform(value, srtIndex) {
@@ -34,11 +36,16 @@ function messageVerification() {
       let strValue = value.split("");
       let exist = false;
       let notBadWord = false;
+      let isEmail = false;
+
+      strValue.filter((char) => (char == "-" ? (exist = true) : false));
+      palavras.filter((word) => (word == value ? (notBadWord = true) : false));
+      typesEmails.filter((emails) => (value.endsWith(emails) ? (isEmail = true) : false));
 
       strValue.forEach((char) => {
         regex.forEach((charInRegex) => {
           if (char != charInRegex) return;
-          if (value.endsWith(".com")) return;
+          if (isEmail) return;
           if (isNaN(value) == false) return;
 
           strTransform(value, index);
@@ -46,9 +53,6 @@ function messageVerification() {
       });
 
       if (!value.includes(element)) return;
-
-      strValue.filter((val) => (val == "-" ? (exist = true) : false));
-      palavras.filter((val) => (val == value ? (notBadWord = true) : false));
 
       if (notBadWord) return;
       if (exist) return;
@@ -64,10 +68,7 @@ function messageVerification() {
     initialMessageArr[index] = str;
   });
 
-  finalMessage = initialMessageArr.reduce(
-    (acc, valorAtual) => acc + valorAtual + " ",
-    " "
-  );
+  finalMessage = initialMessageArr.reduce((acc, valorAtual) => acc + valorAtual + " ", " ");
 
   messages.innerHTML += `<p class="message">${finalMessage}</p>`;
 }
