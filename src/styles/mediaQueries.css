@@ -1,0 +1,17 @@
+@media (max-width: 1000px) {
+  #container {
+    width: 80%;
+  }
+}
+
+@media (max-width: 420px) {
+  #container {
+    width: 100%;
+  }
+
+  #messages {
+    border: none;
+    border-radius: none;
+    box-shadow: none;
+  }
+}
