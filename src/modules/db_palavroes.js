@@ -6,7 +6,7 @@ const palavroes = [
   "biba",
   "bolagato",
   "boqueteir",
-  "boiola",
+  "boiol",
   "boga",
   "bost",
   "bucet",
@@ -17,7 +17,7 @@ const palavroes = [
   "corn",
   "cu",
 
-  "descgra",
+  "desgra",
   "drogad",
 
   "fiofo",
@@ -50,7 +50,8 @@ const palavroes = [
   "raparig",
   "retardad",
   "rola",
-  "ruel",
+  "roela",
+  "ruela",
 
   "sexo",
 

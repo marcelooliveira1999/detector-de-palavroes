@@ -39,7 +39,7 @@ function messageVerification() {
       let isEmail = false;
 
       strValue.filter((char) => (char == "-" ? (exist = true) : false));
-      palavras.filter((word) => (word == value ? (notBadWord = true) : false));
+      palavras.filter((word) => (value.includes(word) ? (notBadWord = true) : false));
       typesEmails.filter((emails) => (value.endsWith(emails) ? (isEmail = true) : false));
 
       strValue.forEach((char) => {
@@ -75,6 +75,10 @@ function messageVerification() {
 
 messageContent.addEventListener("keydown", (e) => {
   if (e.code == "Enter") messageVerification();
+});
+
+window.addEventListener("keydown", () => {
+  messageContent.focus();
 });
 
 getUserMessage.addEventListener("click", messageVerification);
